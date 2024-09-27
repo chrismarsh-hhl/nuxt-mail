@@ -9,7 +9,7 @@
     ".eslintrc.json": true,
     ".gitattributes": true,
     ".github": true,
-    // ".gitignore": true,
+    ".gitignore": true,
     ".gitpod.Dockerfile": true,
     ".gitpod.yml": true,
     ".husky": true,

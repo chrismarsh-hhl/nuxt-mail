@@ -46,6 +46,7 @@
     "fs-extra": "^11.1.0",
     "h3": "^1.0.2",
     "nodemailer": "^6.4.11",
+    "nuxt": "^3.3.3",
     "nuxt-alias-path": "^2.0.0",
     "nuxt-push-plugins": "^2.1.2",
     "parse-packagejson-name": "^1.0.1"
@@ -58,7 +59,6 @@
     "axios": "^0",
     "depcheck-package-name": "^3.0.0",
     "execa": "^8.0.1",
-    "nuxt": "^3.3.3",
     "nuxt-dev-ready": "^3.0.0",
     "ora": "^8.0.1",
     "output-files": "^2.0.19",

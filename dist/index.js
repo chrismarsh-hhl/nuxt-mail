@@ -1,8 +1,9 @@
 import { some } from '@dword-design/functions';
-import { addImports, addServerHandler, addTemplate, createResolver, isNuxt3 as isNuxt3Try, useRuntimeConfig } from '@nuxt/kit';
+import { addImports, addServerHandler, addTemplate, createResolver, isNuxt3 as isNuxt3Try } from '@nuxt/kit';
 import express from 'express';
 import fs from 'fs-extra';
 import nodemailer from 'nodemailer';
+import { useRuntimeConfig } from 'nuxt/app';
 import nuxtAliasPath from 'nuxt-alias-path';
 import nuxtPushPlugins from 'nuxt-push-plugins';
 import parsePackagejsonName from 'parse-packagejson-name';
@@ -13,7 +14,13 @@ const packageConfig = fs.readJsonSync(resolver.resolve('../package.json'));
 const moduleName = parsePackagejsonName(packageConfig.name).fullName;
 export default function (moduleOptions, nuxt) {
   nuxt = nuxt || this;
-  const runtimeConfig = useRuntimeConfig();
+  let isNuxt3 = true;
+  try {
+    isNuxt3 = isNuxt3Try();
+  } catch {
+    isNuxt3 = false;
+  }
+  const runtimeConfig = isNuxt3 ? useRuntimeConfig() : nuxt.options.privateRuntimeConfig;
   const options = {
     ...runtimeConfig.mail,
     ...nuxt.options.mail,
@@ -30,12 +37,6 @@ export default function (moduleOptions, nuxt) {
   }
   if (some(c => !c.to && !c.cc && !c.bcc)(options.message)) {
     throw new Error('You have to provide to/cc/bcc in all configs.');
-  }
-  let isNuxt3 = true;
-  try {
-    isNuxt3 = isNuxt3Try();
-  } catch {
-    isNuxt3 = false;
   }
   if (isNuxt3) {
     addTemplate({

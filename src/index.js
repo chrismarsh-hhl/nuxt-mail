@@ -9,13 +9,13 @@ import {
 import express from 'express';
 import fs from 'fs-extra';
 import nodemailer from 'nodemailer';
+import { useRuntimeConfig } from 'nuxt/app';
 import nuxtAliasPath from 'nuxt-alias-path';
 import nuxtPushPlugins from 'nuxt-push-plugins';
 import parsePackagejsonName from 'parse-packagejson-name';
 import P from 'path';
 
 import send from './send.js';
-import { useRuntimeConfig } from 'nuxt/app';
 
 const resolver = createResolver(import.meta.url);
 const packageConfig = fs.readJsonSync(resolver.resolve('../package.json'));
@@ -31,7 +31,9 @@ export default function (moduleOptions, nuxt) {
     isNuxt3 = false;
   }
 
-  const runtimeConfig = isNuxt3 ? useRuntimeConfig() : nuxt.options['privateRuntimeConfig'];
+  const runtimeConfig = isNuxt3
+    ? useRuntimeConfig()
+    : nuxt.options.privateRuntimeConfig;
 
   const options = {
     ...runtimeConfig.mail,
