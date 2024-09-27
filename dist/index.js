@@ -1,9 +1,8 @@
 import { some } from '@dword-design/functions';
-import { addImports, addServerHandler, addTemplate, createResolver, isNuxt3 as isNuxt3Try } from '@nuxt/kit';
+import { addImports, addServerHandler, addTemplate, createResolver, isNuxt3 as isNuxt3Try, useRuntimeConfig } from '@nuxt/kit';
 import express from 'express';
 import fs from 'fs-extra';
 import nodemailer from 'nodemailer';
-import { useRuntimeConfig } from 'nuxt/app';
 import nuxtAliasPath from 'nuxt-alias-path';
 import nuxtPushPlugins from 'nuxt-push-plugins';
 import parsePackagejsonName from 'parse-packagejson-name';
