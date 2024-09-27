@@ -25,6 +25,7 @@ export default function (moduleOptions, nuxt) {
     ...nuxt.options.mail,
     ...moduleOptions
   };
+  console.log(options);
   if (!options.smtp) {
     throw new Error('SMTP config is missing.');
   }
